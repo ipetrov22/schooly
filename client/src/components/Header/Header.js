@@ -13,6 +13,7 @@ const useStyles = makeStyles(() => ({
     },
     title: {
         flexGrow: 1,
+        textDecoration: "none"
     }
 }));
 
@@ -23,7 +24,7 @@ export default function Header() {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
+                    <Typography color="inherit" variant="h6" className={classes.title} component={Link} to="/">
                         Schooly
                     </Typography>
                     <Button color="inherit" component={Link} to="/login">Влез</Button>
