@@ -5,29 +5,31 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-  }
+    root: {
+        flexGrow: 1,
+    },
+    title: {
+        flexGrow: 1,
+    }
 }));
 
 export default function Header() {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Schooly
-          </Typography>
-          <Button color="inherit">Влез</Button>
-          <Button color="inherit">Регистрирай се</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+    return (
+        <div className={classes.root}>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" className={classes.title}>
+                        Schooly
+                    </Typography>
+                    <Button color="inherit" component={Link} to="/login">Влез</Button>
+                    <Button color="inherit" component={Link} to="/register">Регистрирай се</Button>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
