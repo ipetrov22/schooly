@@ -60,7 +60,6 @@ export default function Login() {
                         label="Имейл адрес"
                         name="email"
                         autoComplete="email"
-                        autoFocus
                     />
                     <TextField
                         variant="outlined"
@@ -95,7 +94,7 @@ export default function Login() {
                     </Grid>
                 </form>
             </div>
-            <Box mt={8}>
+            <Box mt={5}>
                 <Copyright />
             </Box>
         </Container>
