@@ -3,6 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import MaterialLink from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -25,14 +26,11 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%',
         marginTop: theme.spacing(3),
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
-    },
-    link: {
-        textDecoration: 'none'
     },
 }));
 
@@ -98,9 +96,9 @@ export default function Register() {
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link to="/login" className={classes.link}>
+                            <MaterialLink variant="body2" component={Link} to="/login">
                                 Вече имате акаунт? Влезте от тук.
-                            </Link>
+                            </MaterialLink>
                         </Grid>
                     </Grid>
                 </form>
