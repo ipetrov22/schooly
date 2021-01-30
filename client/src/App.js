@@ -1,11 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header/Header';
+import Header from './components/Header';
+import AppRouter from './AppRouter';
 
 function App() {
   return (
     <div className="App">
       <Header />
+
+      <AppRouter />
     </div>
   );
 }
