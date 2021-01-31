@@ -1,6 +1,7 @@
 import './App.css';
 import Header from './components/Header';
 import AppRouter from './AppRouter';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -8,6 +9,8 @@ function App() {
       <Header />
 
       <AppRouter />
+
+      <Footer />
     </div>
   );
 }

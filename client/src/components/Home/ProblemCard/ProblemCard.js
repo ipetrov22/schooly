@@ -6,37 +6,28 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-const useStyles = makeStyles({
-    root: {
-        minWidth: 275,
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-});
+const useStyles = makeStyles((theme) => ({
+    card: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+    }
+}));
 
 export default function SimpleCard() {
     const classes = useStyles();
 
     return (
         <Grid item xs={12} sm={6} md={4}>
-            <Card className={classes.root}>
+            <Card className={classes.card}>
                 <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    <Typography color="textSecondary" gutterBottom>
                         Jan 09 2021
                     </Typography>
                     <Typography variant="h5" component="h2">
                         Математика
                     </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
+                    <Typography color="textSecondary">
                         12 Клас
                     </Typography>
                     <Typography variant="body2" component="p">
