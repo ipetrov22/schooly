@@ -27,7 +27,7 @@ export default function SimpleCard() {
     const classes = useStyles();
 
     return (
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
             <Card className={classes.root}>
                 <CardContent>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
