@@ -1,6 +1,7 @@
 import { Container, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Comments from './Comments';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -39,6 +40,8 @@ export default function Details() {
                     </Typography>
                 </Grid>
             </Grid>
+
+            <Comments/>
         </Container>
 
     );
