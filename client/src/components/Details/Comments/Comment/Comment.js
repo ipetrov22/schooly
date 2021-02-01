@@ -3,7 +3,7 @@ import PersonIcon from '@material-ui/icons/Person';
 
 export default function Comment() {
     return (
-        <Paper style={{ padding: "40px 20px", marginTop: 10 }}>
+        <Paper style={{ padding: "40px 20px", marginTop: 10, clear: "both" }}>
             <Grid container wrap="nowrap" spacing={2}>
                 <Grid item>
                     <PersonIcon />

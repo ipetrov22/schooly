@@ -18,7 +18,7 @@ export default function Details() {
             <Grid container>
                 <Grid item xs={12}>
                     <Typography variant="overline" display="block" gutterBottom>
-                       Subject 11 Grade
+                       Математика 11 Клас
                     </Typography>
 
                     <Typography variant="h4" component="h4">
