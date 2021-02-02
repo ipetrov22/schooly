@@ -10,6 +10,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+
+import validators from '../../utils/validators';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,6 +37,39 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
     const classes = useStyles();
 
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        repeatPassword: ''
+    });
+
+    const [validationData, setValidationData] = useState({
+        errors: {
+            email: '',
+            password: '',
+            repeatPassword: ''
+        },
+        touched: {
+            email: false,
+            password: false,
+            repeatPassword: false
+        }
+    })
+
+    const handleChange = (e) => {
+        const field = e.target.name;
+        const value = e.target.value;
+
+        const newFormData = { ...formData };
+        newFormData[field] = value;
+        setFormData(newFormData);
+
+        const newValidationData = { ...validationData };
+        newValidationData.errors[field] = validators[field](value, formData.password);
+        newValidationData.touched[field] = true;
+        setValidationData(newValidationData);
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -51,10 +87,12 @@ export default function Register() {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="email"
                                 label="Имейл адрес"
                                 name="email"
                                 autoComplete="email"
+                                onChange={handleChange}
+                                error={validationData.touched.email && validationData.errors.email ? true : false}
+                                helperText={validationData.touched.email && validationData.errors.email}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -65,8 +103,10 @@ export default function Register() {
                                 name="password"
                                 label="Парола"
                                 type="password"
-                                id="password"
                                 autoComplete="current-password"
+                                onChange={handleChange}
+                                error={validationData.touched.password && validationData.errors.password ? true : false}
+                                helperText={validationData.touched.password && validationData.errors.password}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -77,8 +117,10 @@ export default function Register() {
                                 name="repeatPassword"
                                 label="Повтори паролата"
                                 type="password"
-                                id="repeatPassword"
                                 autoComplete="current-password"
+                                onChange={handleChange}
+                                error={validationData.touched.repeatPassword && validationData.errors.repeatPassword ? true : false}
+                                helperText={validationData.touched.repeatPassword && validationData.errors.repeatPassword}
                             />
                         </Grid>
                     </Grid>
