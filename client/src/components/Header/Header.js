@@ -22,7 +22,6 @@ const useStyles = makeStyles(() => ({
 export default function Header() {
     const classes = useStyles();
     const auth = useContext(AuthContext);
-    console.log(auth);
 
     return (
         <div className={classes.root}>
