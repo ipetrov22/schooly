@@ -2,16 +2,20 @@ import './App.css';
 import Header from './components/Header';
 import AppRouter from './AppRouter';
 import Footer from './components/Footer';
+import firebase from './firebase';
+import FirebaseContext from './contexts/FirebaseContext';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
+    <FirebaseContext.Provider value={firebase}>
+      <div className="App">
+        <Header />
 
-      <AppRouter />
+        <AppRouter />
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </FirebaseContext.Provider>
   );
 }
 

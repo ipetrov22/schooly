@@ -10,4 +10,5 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+console.log('im in firebase file');
 export default firebase;
