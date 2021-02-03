@@ -11,7 +11,8 @@ import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import validators from '../../utils/validators';
-import firebase from '../../firebase';
+import { register } from '../../services/userService';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -33,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Register({ history }) {
+export default function Register() {
+    const history = useHistory();
     const classes = useStyles();
 
     const [formData, setFormData] = useState({
@@ -74,13 +76,13 @@ export default function Register({ history }) {
 
         if (!validationData.errors.email && !validationData.errors.password && !validationData.errors.repeatPassword
             && validationData.touched.email && validationData.touched.password && validationData.touched.repeatPassword) {
-            firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password)
+            register(formData.email, formData.password)
                 .then(user => {
                     history.push('/');
                 })
                 .catch(error => {
                     console.log(error);
-                });
+                });;
         }
     }
 
