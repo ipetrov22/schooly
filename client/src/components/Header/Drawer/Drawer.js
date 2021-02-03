@@ -12,7 +12,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import { logout } from '../../../services/userService';
 const useStyles = makeStyles({
     list: {
         width: 250,
@@ -34,6 +34,16 @@ export default function MenuDrawer() {
         setOpen(open);
     };
 
+    const logoutHandler = () => {
+        logout()
+            .then((res) => {
+                console.log(res);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     const list = (
         <div
             className={clsx(classes.list)}
@@ -49,7 +59,7 @@ export default function MenuDrawer() {
             </List>
             <Divider />
             <List>
-                <ListItem button key={'logout'}>
+                <ListItem button onClick={logoutHandler} key={'logout'}>
                     <ListItemIcon><ExitToAppIcon /></ListItemIcon>
                     <ListItemText primary={'Излез'} />
                 </ListItem>

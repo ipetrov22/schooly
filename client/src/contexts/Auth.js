@@ -7,9 +7,11 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        firebase.auth().onAuthStateChanged((user) => {
+        const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
             setUser(user);
-        })
+        });
+
+        return unsubscribe;
     }, []);
 
     return (
