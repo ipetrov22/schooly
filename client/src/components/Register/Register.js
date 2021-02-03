@@ -8,11 +8,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-
 import validators from '../../utils/validators';
+import firebase from '../../firebase';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Register() {
+export default function Register({ history }) {
     const classes = useStyles();
 
     const [formData, setFormData] = useState({
@@ -70,6 +69,21 @@ export default function Register() {
         setValidationData(newValidationData);
     }
 
+    const submitForm = (e) => {
+        e.preventDefault();
+
+        if (!validationData.errors.email && !validationData.errors.password && !validationData.errors.repeatPassword
+            && validationData.touched.email && validationData.touched.password && validationData.touched.repeatPassword) {
+            firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password)
+                .then(user => {
+                    history.push('/');
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -80,7 +94,7 @@ export default function Register() {
                 <Typography component="h1" variant="h5">
                     Регистрация
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={submitForm}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField

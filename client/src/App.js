@@ -2,12 +2,11 @@ import './App.css';
 import Header from './components/Header';
 import AppRouter from './AppRouter';
 import Footer from './components/Footer';
-import firebase from './firebase';
-import FirebaseContext from './contexts/FirebaseContext';
+import { AuthProvider } from './contexts/Auth';
 
 function App() {
   return (
-    <FirebaseContext.Provider value={firebase}>
+    <AuthProvider>
       <div className="App">
         <Header />
 
@@ -15,7 +14,7 @@ function App() {
 
         <Footer />
       </div>
-    </FirebaseContext.Provider>
+    </AuthProvider>
   );
 }
 
