@@ -1,3 +1,4 @@
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -30,9 +31,13 @@ export default function Header() {
                     <Typography color="inherit" variant="h6" className={classes.title} component={Link} to="/">
                         Schooly
                     </Typography>
-                    <Button color="inherit" component={Link} to="/login">Влез</Button>
-                    <Button color="inherit" component={Link} to="/register">Регистрирай се</Button>
-                    <Drawer/>
+                    {
+                        auth ? <Drawer />
+                            : <React.Fragment>
+                                <Button color="inherit" component={Link} to="/login">Влез</Button>
+                                <Button color="inherit" component={Link} to="/register">Регистрирай се</Button>
+                            </React.Fragment>
+                    }
                 </Toolbar>
             </AppBar>
         </div>
