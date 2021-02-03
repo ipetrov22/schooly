@@ -8,11 +8,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import validators from '../../utils/validators';
 import { register } from '../../services/userService';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -82,7 +81,7 @@ export default function Register() {
                 })
                 .catch(error => {
                     console.log(error);
-                });;
+                });
         }
     }
 
