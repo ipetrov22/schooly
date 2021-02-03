@@ -37,7 +37,7 @@ export default function MenuDrawer() {
     const logoutHandler = () => {
         logout()
             .then((res) => {
-                console.log(res);
+                
             })
             .catch(error => {
                 console.log(error);

@@ -13,8 +13,10 @@ const useStyles = makeStyles(() => ({
     root: {
         flexGrow: 1,
     },
+    titleContainer: {
+        flexGrow: 1
+    },
     title: {
-        flexGrow: 1,
         textDecoration: "none"
     }
 }));
@@ -27,9 +29,11 @@ export default function Header() {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography color="inherit" variant="h6" className={classes.title} component={Link} to="/">
-                        Schooly
-                    </Typography>
+                    <div className={classes.titleContainer}>
+                        <Typography color="inherit" variant="h6" className={classes.title} component={Link} to="/">
+                            Schooly
+                        </Typography>
+                    </div>
                     {
                         auth ? <Drawer />
                             : <React.Fragment>
