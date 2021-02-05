@@ -3,7 +3,11 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/Auth';
+
 export default function Intro({ classes }) {
+    const auth = useContext(AuthContext);
 
     return (
         <div className={classes.content}>
@@ -14,7 +18,7 @@ export default function Intro({ classes }) {
                 <hr />
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
                     Имаш затруднения в училище? Потърси помощ тук.
-                    Регистрирай се, за да можеш да задаваш и отговаряш на въпроси.
+                    {auth ? null : 'Влез или се регистрирай, за да можеш да задаваш и отговаряш на въпроси.'}
                 </Typography>
 
                 <div className={classes.buttons}>
