@@ -3,11 +3,32 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
+import React from 'react';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/Auth';
 
 export default function Intro({ classes }) {
     const auth = useContext(AuthContext);
+
+    const buttons = auth ?
+        <Grid item>
+            <Button component={Link} to="/ask" variant="contained" color="primary">
+                Задай въпрос
+            </Button>
+        </Grid>
+        : <React.Fragment>
+            <Grid item>
+                <Button component={Link} to="/login" variant="contained" color="primary">
+                    Влез
+                </Button>
+            </Grid>
+            <Grid item>
+                <Button component={Link} to="/register" variant="outlined" color="primary">
+                    Регистрирай се
+                </Button>
+            </Grid>
+        </React.Fragment>
 
     return (
         <div className={classes.content}>
@@ -23,16 +44,7 @@ export default function Intro({ classes }) {
 
                 <div className={classes.buttons}>
                     <Grid container spacing={2} justify="center">
-                        <Grid item>
-                            <Button variant="contained" color="primary">
-                                Main call to action
-                            </Button>
-                        </Grid>
-                        <Grid item>
-                            <Button variant="outlined" color="primary">
-                                Secondary action
-                            </Button>
-                        </Grid>
+                        {buttons}
                     </Grid>
                 </div>
             </Container>
