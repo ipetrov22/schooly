@@ -4,14 +4,13 @@ const topicSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        validate: /[\w \d]+/
     },
     subject: {
         type: String,
         required: true
     },
     grade: {
-        type: String,
+        type: Number,
         required: true
     },
     description: {

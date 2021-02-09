@@ -13,6 +13,7 @@ import {
     Select
 } from '@material-ui/core';
 import { useState } from 'react';
+import validators from '../../utils/validators';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -32,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostProblem() {
     const classes = useStyles();
-
     const [formData, setFormData] = useState({
         title: '',
         subject: '',
@@ -40,26 +40,50 @@ export default function PostProblem() {
         description: ''
     });
 
-    const submitForm = (e) => {
-        e.preventDefault();
-
-        console.log(formData);
-    }
+    const [validationData, setValidationData] = useState({
+        errors: {
+            title: '',
+            subject: '',
+            grade: '',
+            description: ''
+        },
+        touched: {
+            title: false,
+            subject: false,
+            grade: false,
+            description: false
+        }
+    })
 
     const handleChange = (e) => {
         const field = e.target.name;
         const value = e.target.value;
-
         const newFormData = { ...formData };
         newFormData[field] = value;
         setFormData(newFormData);
-    } 
+
+        const newValidationData = { ...validationData };
+        newValidationData.errors[field] = validators[field](value, formData.password);
+        newValidationData.touched[field] = true;
+        setValidationData(newValidationData);
+    }
+
+    const submitForm = (e) => {
+        e.preventDefault();
+
+        if (!validationData.errors.title && !validationData.errors.subject && !validationData.errors.grade
+            && !validationData.errors.description && validationData.touched.title
+            && validationData.touched.subject && validationData.touched.grade && validationData.touched.description) {
+                console.log('inininin')
+        }
+
+    }
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-               <SchoolIcon style={{ fontSize: 50 }}>
+                <SchoolIcon style={{ fontSize: 50 }}>
                     <LockOutlinedIcon />
                 </SchoolIcon>
                 <Typography component="h1" variant="h5">
@@ -75,6 +99,8 @@ export default function PostProblem() {
                         name="title"
                         autoComplete="title"
                         onChange={handleChange}
+                        error={validationData.touched.title && validationData.errors.title ? true : false}
+                        helperText={validationData.touched.title && validationData.errors.title}
                     />
 
                     <FormControl className={classes.formControl}
@@ -83,7 +109,7 @@ export default function PostProblem() {
                         required
                     >
                         <InputLabel>Предмет</InputLabel>
-                        <Select name="subject"  value={formData.subject} onChange={handleChange}>
+                        <Select name="subject" value={formData.subject} onChange={handleChange}>
                             <MenuItem value={"math"}>Математика</MenuItem>
                             <MenuItem value={"bulgarian"}>Български език и литература</MenuItem>
                             <MenuItem value={"english"}>Английски език</MenuItem>
@@ -108,7 +134,7 @@ export default function PostProblem() {
                         required
                     >
                         <InputLabel>Клас</InputLabel>
-                        <Select name="grade"  value={formData.grade} onChange={handleChange}>
+                        <Select name="grade" value={formData.grade} onChange={handleChange}>
                             <MenuItem value={12}>12</MenuItem>
                             <MenuItem value={11}>11</MenuItem>
                             <MenuItem value={10}>10</MenuItem>
@@ -130,7 +156,11 @@ export default function PostProblem() {
                         label="Описание"
                         fullWidth
                         multiline
-                        onChange={handleChange} />
+                        onChange={handleChange}
+                        error={validationData.touched.description && validationData.errors.description ? true : false}
+                        helperText={validationData.touched.description && validationData.errors.description}
+                    />
+
 
                     <Button
                         type="submit"
