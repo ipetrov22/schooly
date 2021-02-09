@@ -71,6 +71,12 @@ export default function PostProblem() {
     const submitForm = (e) => {
         e.preventDefault();
 
+        if (!validationData.errors.title && !validationData.errors.subject && !validationData.errors.grade
+            && !validationData.errors.description && validationData.touched.title
+            && validationData.touched.subject && validationData.touched.grade && validationData.touched.description) {
+            console.log('INININI')
+        }
+
     }
 
     return (
@@ -93,6 +99,8 @@ export default function PostProblem() {
                         name="title"
                         autoComplete="title"
                         onChange={handleChange}
+                        error={validationData.touched.title && validationData.errors.title ? true : false}
+                        helperText={validationData.touched.title && validationData.errors.title}
                     />
 
                     <FormControl className={classes.formControl}
@@ -149,6 +157,8 @@ export default function PostProblem() {
                         fullWidth
                         multiline
                         onChange={handleChange}
+                        error={validationData.touched.description && validationData.errors.description ? true : false}
+                        helperText={validationData.touched.description && validationData.errors.description}
                     />
 
 
