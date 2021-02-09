@@ -13,6 +13,7 @@ import {
     Select
 } from '@material-ui/core';
 import { useState } from 'react';
+import validators from '../../utils/validators';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -33,19 +34,43 @@ const useStyles = makeStyles((theme) => ({
 export default function PostProblem() {
     const classes = useStyles();
     const [formData, setFormData] = useState({
-        topic: null,
+        title: null,
         subject: '',
         grade: '',
         description: null
     });
+
+    const [validationData, setValidationData] = useState({
+        errors: {
+            title: '',
+            subject: '',
+            grade: '',
+            description: ''
+        },
+        touched: {
+            title: false,
+            subject: false,
+            grade: false,
+            description: false
+        }
+    })
 
     const handleChange = (e) => {
         const field = e.target.name;
         const value = e.target.value;
         const newFormData = { ...formData };
         newFormData[field] = value;
-
         setFormData(newFormData);
+
+        const newValidationData = { ...validationData };
+        newValidationData.errors[field] = validators[field](value, formData.password);
+        newValidationData.touched[field] = true;
+        setValidationData(newValidationData);
+    }
+
+    const submitForm = (e) => {
+        e.preventDefault();
+
     }
 
     return (
@@ -59,14 +84,14 @@ export default function PostProblem() {
                     Задай въпрос
                 </Typography>
 
-                <form className={classes.form} action="/ask" method="POST" noValidate>
+                <form className={classes.form} noValidate onSubmit={submitForm}>
                     <TextField
                         margin="normal"
                         required
                         fullWidth
                         label="Тема"
-                        name="topic"
-                        autoComplete="topic"
+                        name="title"
+                        autoComplete="title"
                         onChange={handleChange}
                     />
 
