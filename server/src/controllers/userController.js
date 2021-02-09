@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
 
-const { userService } = require('../services/index');
+const { userService } = require('../services');
 
 module.exports = router;

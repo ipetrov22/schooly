@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
-
-const URI = 'mongodb+srv://Dario:userDB@schoolydb.21nfr.mongodb.net/schoolydb?retryWrites=true&w=majority';
+const { URI, config} = require('./config');
 
 const connectDB = async () => {
-    await mongoose.connect(URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
-    console.log('Connected to DB!');
+    try {
+        await mongoose.connect(URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log('Connected to DB!');
+    }
+    catch(error) {
+        console.log(error.message);
+    }
 }
 
 module.exports = connectDB;

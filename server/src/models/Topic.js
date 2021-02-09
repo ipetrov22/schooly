@@ -4,7 +4,7 @@ const topicSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        // validate: /^[-a-z0-9,/()&:. ]*[a-z][-a-z0-9,/()&:. ]*$/
+        validate: /[\w \d]+/
     },
     subject: {
         type: String,
