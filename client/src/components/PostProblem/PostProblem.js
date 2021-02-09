@@ -34,10 +34,10 @@ const useStyles = makeStyles((theme) => ({
 export default function PostProblem() {
     const classes = useStyles();
     const [formData, setFormData] = useState({
-        title: null,
+        title: '',
         subject: '',
         grade: '',
-        description: null
+        description: ''
     });
 
     const [validationData, setValidationData] = useState({
@@ -74,7 +74,7 @@ export default function PostProblem() {
         if (!validationData.errors.title && !validationData.errors.subject && !validationData.errors.grade
             && !validationData.errors.description && validationData.touched.title
             && validationData.touched.subject && validationData.touched.grade && validationData.touched.description) {
-            console.log('INININI')
+                console.log('inininin')
         }
 
     }
