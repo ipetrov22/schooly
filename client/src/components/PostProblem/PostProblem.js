@@ -54,7 +54,7 @@ export default function PostProblem() {
                     Задай въпрос
                 </Typography>
 
-                <form className={classes.form} noValidate>
+                <form className={classes.form} action="/ask" method="POST" noValidate>
                     <TextField
                         margin="normal"
                         required
