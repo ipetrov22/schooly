@@ -34,7 +34,7 @@ export default function PostProblem() {
     const classes = useStyles();
 
     const [formData, setFormData] = useState({
-        topic: '',
+        title: '',
         subject: '',
         grade: '',
         description: ''
@@ -72,8 +72,8 @@ export default function PostProblem() {
                         required
                         fullWidth
                         label="Тема"
-                        name="topic"
-                        autoComplete="topic"
+                        name="title"
+                        autoComplete="title"
                         onChange={handleChange}
                     />
 
