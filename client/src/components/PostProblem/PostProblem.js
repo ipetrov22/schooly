@@ -32,15 +32,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostProblem() {
     const classes = useStyles();
-    const [subject, setSubject] = useState('');
-    const [grade, setGrade] = useState('');
+    const [formData, setFormData] = useState({
+        topic: null,
+        subject: '',
+        grade: '',
+        description: null
+    });
 
-    const changeSubject = (e) => {
-        setSubject(e.target.value);
-    }
+    const handleChange = (e) => {
+        const field = e.target.name;
+        const value = e.target.value;
+        const newFormData = { ...formData };
+        newFormData[field] = value;
 
-    const changeGrade = (e) => {
-        setGrade(e.target.value);
+        setFormData(newFormData);
     }
 
     return (
@@ -62,6 +67,7 @@ export default function PostProblem() {
                         label="Тема"
                         name="topic"
                         autoComplete="topic"
+                        onChange={handleChange}
                     />
 
                     <FormControl className={classes.formControl}
@@ -70,7 +76,7 @@ export default function PostProblem() {
                         required
                     >
                         <InputLabel>Предмет</InputLabel>
-                        <Select name="subject" value={subject} onChange={changeSubject}>
+                        <Select name="subject" value={formData.subject} onChange={handleChange}>
                             <MenuItem value={"math"}>Математика</MenuItem>
                             <MenuItem value={"bulgarian"}>Български език и литература</MenuItem>
                             <MenuItem value={"english"}>Английски език</MenuItem>
@@ -95,7 +101,7 @@ export default function PostProblem() {
                         required
                     >
                         <InputLabel>Клас</InputLabel>
-                        <Select name="grade" value={grade} onChange={changeGrade}>
+                        <Select name="grade" value={formData.grade} onChange={handleChange}>
                             <MenuItem value={12}>12</MenuItem>
                             <MenuItem value={11}>11</MenuItem>
                             <MenuItem value={10}>10</MenuItem>
@@ -116,7 +122,10 @@ export default function PostProblem() {
                         margin="normal"
                         label="Описание"
                         fullWidth
-                        multiline />
+                        multiline
+                        onChange={handleChange}
+                    />
+
 
                     <Button
                         type="submit"
