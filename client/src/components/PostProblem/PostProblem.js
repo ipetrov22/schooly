@@ -32,8 +32,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostProblem() {
     const classes = useStyles();
-    const [subject, setSubject] = useState('');
-    const [grade, setGrade] = useState('');
+    /* const [subject, setSubject] = useState('');
+    const [grade, setGrade] = useState(''); */
+
+    const [formData, setFormData] = useState({
+        topic: '',
+        subject: '',
+        grade: '',
+        description: ''
+    });
+
+    /* const [validationData, setValidationData] = useState({
+        errors: {
+            topic: '',
+            subject: '',
+            grade: '',
+            value: ''
+        }, 
+        touched: {
+            topic: '',
+            subject: '',
+            grade: '',
+            value: ''
+        }
+    }); 
 
     const changeSubject = (e) => {
         setSubject(e.target.value);
@@ -41,20 +63,35 @@ export default function PostProblem() {
 
     const changeGrade = (e) => {
         setGrade(e.target.value);
+    }*/
+
+    const submitForm = (e) => {
+        e.preventDefault();
+
+        console.log(formData);
     }
+
+    const handleChange = (e) => {
+        const field = e.target.name;
+        const value = e.target.value;
+
+        const newFormData = { ...formData };
+        newFormData[field] = value;
+        setFormData(newFormData);
+    } 
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-                <SchoolIcon style={{ fontSize: 50 }}>
+               <SchoolIcon style={{ fontSize: 50 }}>
                     <LockOutlinedIcon />
                 </SchoolIcon>
                 <Typography component="h1" variant="h5">
                     Задай въпрос
                 </Typography>
 
-                <form className={classes.form} action="/ask" method="POST" noValidate>
+                <form className={classes.form} noValidate onSubmit={submitForm}>
                     <TextField
                         margin="normal"
                         required
@@ -62,6 +99,7 @@ export default function PostProblem() {
                         label="Тема"
                         name="topic"
                         autoComplete="topic"
+                        onChange={handleChange}
                     />
 
                     <FormControl className={classes.formControl}
@@ -70,7 +108,7 @@ export default function PostProblem() {
                         required
                     >
                         <InputLabel>Предмет</InputLabel>
-                        <Select name="subject" value={subject} onChange={changeSubject}>
+                        <Select name="subject"  value={formData.subject} /* onChange={changeSubject} */ onChange={handleChange}>
                             <MenuItem value={"math"}>Математика</MenuItem>
                             <MenuItem value={"bulgarian"}>Български език и литература</MenuItem>
                             <MenuItem value={"english"}>Английски език</MenuItem>
@@ -95,7 +133,7 @@ export default function PostProblem() {
                         required
                     >
                         <InputLabel>Клас</InputLabel>
-                        <Select name="grade" value={grade} onChange={changeGrade}>
+                        <Select name="grade"  value={formData.grade} /* onChange={changeGrade} */ onChange={handleChange}>
                             <MenuItem value={12}>12</MenuItem>
                             <MenuItem value={11}>11</MenuItem>
                             <MenuItem value={10}>10</MenuItem>
@@ -116,7 +154,8 @@ export default function PostProblem() {
                         margin="normal"
                         label="Описание"
                         fullWidth
-                        multiline />
+                        multiline
+                        onChange={handleChange} />
 
                     <Button
                         type="submit"
