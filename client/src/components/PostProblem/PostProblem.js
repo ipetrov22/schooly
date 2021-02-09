@@ -32,8 +32,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostProblem() {
     const classes = useStyles();
-    /* const [subject, setSubject] = useState('');
-    const [grade, setGrade] = useState(''); */
 
     const [formData, setFormData] = useState({
         topic: '',
@@ -41,29 +39,6 @@ export default function PostProblem() {
         grade: '',
         description: ''
     });
-
-    /* const [validationData, setValidationData] = useState({
-        errors: {
-            topic: '',
-            subject: '',
-            grade: '',
-            value: ''
-        }, 
-        touched: {
-            topic: '',
-            subject: '',
-            grade: '',
-            value: ''
-        }
-    }); 
-
-    const changeSubject = (e) => {
-        setSubject(e.target.value);
-    }
-
-    const changeGrade = (e) => {
-        setGrade(e.target.value);
-    }*/
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -108,7 +83,7 @@ export default function PostProblem() {
                         required
                     >
                         <InputLabel>Предмет</InputLabel>
-                        <Select name="subject"  value={formData.subject} /* onChange={changeSubject} */ onChange={handleChange}>
+                        <Select name="subject"  value={formData.subject} onChange={handleChange}>
                             <MenuItem value={"math"}>Математика</MenuItem>
                             <MenuItem value={"bulgarian"}>Български език и литература</MenuItem>
                             <MenuItem value={"english"}>Английски език</MenuItem>
@@ -133,7 +108,7 @@ export default function PostProblem() {
                         required
                     >
                         <InputLabel>Клас</InputLabel>
-                        <Select name="grade"  value={formData.grade} /* onChange={changeGrade} */ onChange={handleChange}>
+                        <Select name="grade"  value={formData.grade} onChange={handleChange}>
                             <MenuItem value={12}>12</MenuItem>
                             <MenuItem value={11}>11</MenuItem>
                             <MenuItem value={10}>10</MenuItem>
