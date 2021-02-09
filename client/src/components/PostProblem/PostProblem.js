@@ -13,7 +13,9 @@ import {
     Select
 } from '@material-ui/core';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import validators from '../../utils/validators';
+import { postTopic } from '../../services/topicService';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -33,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostProblem() {
     const classes = useStyles();
+    const history = useHistory();
     const [formData, setFormData] = useState({
         title: '',
         subject: '',
@@ -74,7 +77,12 @@ export default function PostProblem() {
         if (!validationData.errors.title && !validationData.errors.subject && !validationData.errors.grade
             && !validationData.errors.description && validationData.touched.title
             && validationData.touched.subject && validationData.touched.grade && validationData.touched.description) {
-                console.log('inininin')
+                postTopic(formData)
+                    .then((data) => {
+                        // id = data._id
+                        history.push('/');
+                    })
+                    .catch(e => console.log(e));
         }
 
     }
