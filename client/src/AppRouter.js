@@ -20,7 +20,7 @@ export default function AppRouter() {
                 {auth ? <Redirect to="/" /> : <Register />}
             </Route>
 
-            <Route path="/details" component={Details} />
+            <Route path="/details/:id" component={Details} />
             <Route path="/ask" component={PostProblem} />
 
             <Redirect to="/" />
