@@ -11,6 +11,16 @@ async function create(data) {
     }
 }
 
+async function getAll() {
+    try {
+        return await Topic.find().lean();
+    }
+    catch(error) {
+        console.log(error.message);
+    }
+}
+
 module.exports = {
     create,
+    getAll,
 }
