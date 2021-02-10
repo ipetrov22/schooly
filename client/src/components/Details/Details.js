@@ -3,11 +3,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Comments from './Comments';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { getOneTopic } from './../../services/topicService';
 import { subjectDictionary } from '../../utils/dictionaries';
 import React from 'react';
-import { AuthContext } from '../../contexts/Auth';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -17,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Details() {
-    const auth = useContext(AuthContext);
     const classes = useStyles();
     const { id } = useParams();
     const [topic, setTopic] = useState(null);
@@ -30,7 +28,7 @@ export default function Details() {
 
     return (
         <Container className={classes.cardGrid} maxWidth="md">
-            {topic && auth ?
+            {topic ?
                 <React.Fragment>
                     <Grid container>
                         <Grid item xs={12}>
