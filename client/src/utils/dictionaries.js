@@ -1,4 +1,4 @@
-export const subjects = {
+export const subjectDictionary = {
     math: 'Математика',
     bulgarian: 'Български език и литература',
     english: 'Английски език',

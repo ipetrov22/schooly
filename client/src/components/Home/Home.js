@@ -35,8 +35,6 @@ export default function Home() {
             .catch((err) => console.log(err));
     }, []);
 
-    console.log(topics);
-
     return (
         <main>
             <Intro classes={classes} />
