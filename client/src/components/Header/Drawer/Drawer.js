@@ -13,6 +13,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import { logout } from '../../../services/userService';
+import { useHistory } from 'react-router-dom';
+
 const useStyles = makeStyles({
     list: {
         width: 250,
@@ -23,6 +25,7 @@ const useStyles = makeStyles({
 });
 
 export default function MenuDrawer() {
+    const history = useHistory();
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
@@ -37,7 +40,7 @@ export default function MenuDrawer() {
     const logoutHandler = () => {
         logout()
             .then((res) => {
-                
+                history.push('/');
             })
             .catch(error => {
                 console.log(error);

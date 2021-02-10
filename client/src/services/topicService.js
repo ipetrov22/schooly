@@ -6,25 +6,20 @@ export const postTopic = (data) => {
     try {
         return axios.post(`${url}/topic/create`, data);
     }
-    catch(error) {
+    catch (error) {
         console.log(error.message);
     }
 }
 
-export const getAllTopics = async () => {
-    try {
-        return await axios.get(`${url}/topic/getAll`);
-    }
-    catch(error) {
-        console.log(error);
-    }
+export const getAllTopics = () => {
+    return axios.get(`${url}/topic/getAll`);
 }
 
 export const getOneTopic = async (id) => {
     try {
         return axios.get(`${url}/topic/getOne`, { params: { id } });
     }
-    catch(error) {
+    catch (error) {
         console.log(error);
     }
 }
