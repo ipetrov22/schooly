@@ -43,7 +43,7 @@ export default function Details() {
                             </Typography>
 
                             <Typography variant="caption" display="block" gutterBottom>
-                                Jan 28, 2021(still hardcoded) by {auth.email}
+                                Jan 28, 2021(still hardcoded) by creator@email.com
                             </Typography>
 
                             <Typography variant="body1" gutterBottom>
