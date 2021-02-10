@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import ProblemCard from './ProblemCard';
 import Intro from './Intro';
+import { getAllTopics } from '../../services/topicService';
+import { useState, useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -25,6 +27,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
     const classes = useStyles();
+    const [topics, setTopics] = useState(null);
+
+    useEffect(() => {
+        getAllTopics()
+            .then((res) => setTopics(res.data))
+            .catch((err) => console.log(err));
+    }, []);
+
+    console.log(topics);
 
     return (
         <main>
@@ -32,13 +43,7 @@ export default function Home() {
 
             <Container className={classes.cardGrid} maxWidth="md">
                 <Grid container spacing={4}>
-                    <ProblemCard classes={classes} />
-                    <ProblemCard classes={classes} />
-                    <ProblemCard classes={classes} />
-                    <ProblemCard classes={classes} />
-                    <ProblemCard classes={classes} />
-                    <ProblemCard classes={classes} />
-                    <ProblemCard classes={classes} />
+                    {topics && topics.map(topic => <ProblemCard key={topic._id} classes={classes} topic={topic}/>)}
                 </Grid>
             </Container>
         </main>
