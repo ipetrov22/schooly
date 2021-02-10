@@ -15,11 +15,6 @@ export const getAllTopics = () => {
     return axios.get(`${url}/topic/getAll`);
 }
 
-export const getOneTopic = async (id) => {
-    try {
-        return axios.get(`${url}/topic/getOne`, { params: { id } });
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
+export const getOneTopic = (id) => {
+    return axios.get(`${url}/topic/getOne`, { params: { id } });
+};
