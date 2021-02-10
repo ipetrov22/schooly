@@ -2,6 +2,7 @@ import { Container, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Comments from './Comments';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -12,13 +13,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Details() {
     const classes = useStyles();
+    const { id } = useParams();
 
     return (
         <Container className={classes.cardGrid} maxWidth="md">
             <Grid container>
                 <Grid item xs={12}>
                     <Typography variant="overline" display="block" gutterBottom>
-                       Математика 11 Клас
+                        Математика 11 Клас
                     </Typography>
 
                     <Typography variant="h4" component="h4">
@@ -41,7 +43,7 @@ export default function Details() {
                 </Grid>
             </Grid>
 
-            <Comments/>
+            <Comments />
         </Container>
 
     );
