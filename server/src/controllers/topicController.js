@@ -3,12 +3,26 @@ const router = Router();
 
 const topicService = require('../services/topicService');
 
-router.get('/', async (req, res) => {
-    console.log('In get');
+router.post('/create', async (req, res) => {
+    try {
+        const topic = await topicService.create(req.body);
+
+        return res.json(topic);
+    }
+    catch(error) {
+        console.log(error.message);
+    }
 });
 
-router.post('/', async (req, res) => {
-    console.log('In post');
+router.get('/getAll', async (req, res) => {
+    try {
+        let topics = await topicService.getAll();
+
+        return res.json(topics);
+    }
+    catch(error) {
+        console.log(error.message);
+    }
 });
 
 module.exports = router;

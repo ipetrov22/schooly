@@ -3,5 +3,5 @@ const topicController = require('./topicController');
 
 module.exports = {
     userController,
-    topicController
+    topicController,
 }

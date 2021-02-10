@@ -39,7 +39,7 @@ export default function Intro({ classes }) {
                 <hr />
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
                     Имаш затруднения в училище? Потърси помощ тук.
-                    {auth ? null : 'Влез или се регистрирай, за да можеш да задаваш и отговаряш на въпроси.'}
+                    {auth ? null : ' Влез или се регистрирай, за да можеш да задаваш и отговаряш на въпроси.'}
                 </Typography>
 
                 <div className={classes.buttons}>
