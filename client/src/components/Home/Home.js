@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
+    },
+    cardTitle: {
+        wordBreak: 'break-word',
+        paddingTop: '10px'
     }
 }));
 
@@ -41,7 +45,7 @@ export default function Home() {
 
             <Container className={classes.cardGrid} maxWidth="md">
                 <Grid container spacing={4}>
-                    {topics && topics.map(topic => <ProblemCard key={topic._id} classes={classes} topic={topic}/>)}
+                    {topics && topics.map(topic => <ProblemCard key={topic._id} classes={classes} topic={topic} />)}
                 </Grid>
             </Container>
         </main>
