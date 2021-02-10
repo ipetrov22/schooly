@@ -27,7 +27,7 @@ export default function SimpleCard({ classes, topic }) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" component={Link} to="/details">Отвори</Button>
+                    <Button size="small" component={Link} to={`/details/${topic._id}`}>Отвори</Button>
                 </CardActions>
             </Card>
         </Grid>
