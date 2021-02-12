@@ -3,7 +3,7 @@ const Topic = require('../models/Topic');
 async function create(data) {
     try {
         const topic = new Topic(data);
-
+console.log(topic);
         return await topic.save();
     }
     catch(error) {
