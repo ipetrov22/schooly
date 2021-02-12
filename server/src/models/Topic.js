@@ -16,6 +16,22 @@ const topicSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
+    },
+    creator: { 
+        email: {
+            type: String
+        },
+        id: {
+            type: String
+        }
+    },
+    comments: [{
+        ref: 'Comment',
+        type: mongoose.Types.ObjectId
+    }],
+    date: {
+        type: String,
+        default: new Date().toLocaleString()
     }
 });
 
