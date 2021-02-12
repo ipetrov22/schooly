@@ -3,7 +3,7 @@ import Comment from "./Comment";
 
 export default function Comments() {
     return (
-        <div style={{ padding: 14 }}>
+        <div>
             <Typography variant="h4" component="h4" style={{ marginTop: 80, marginBottom: 40 }}>
                 Коментари
             </Typography>
