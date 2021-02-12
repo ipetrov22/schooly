@@ -29,9 +29,9 @@ const topicSchema = new mongoose.Schema({
         ref: 'Comment',
         type: mongoose.Types.ObjectId
     }],
-    date: { 
-        type : Date, 
-        default: Date.now 
+    date: {
+        type: String,
+        default: new Date().toLocaleString()
     }
 });
 
