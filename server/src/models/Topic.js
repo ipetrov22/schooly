@@ -31,7 +31,7 @@ const topicSchema = new mongoose.Schema({
     }],
     date: {
         type: String,
-        default: new Date().toLocaleString()
+        default: new Date().toLocaleString('en-GB')
     }
 });
 

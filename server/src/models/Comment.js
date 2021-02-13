@@ -13,8 +13,8 @@ const commentSchema = new mongoose.Schema({
         }
     },
     date: { 
-        type : Date, 
-        default: new Date().toLocaleString()
+        type : String, 
+        default: new Date().toLocaleString('en-GB')
     },
 })
 
