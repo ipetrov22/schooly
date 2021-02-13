@@ -17,6 +17,7 @@ import { useHistory } from 'react-router-dom';
 import validators from '../../utils/validators';
 import { postTopic } from '../../services/topicService';
 import { AuthContext } from '../../contexts/Auth';
+import Loading from '../Loading';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -38,6 +39,7 @@ export default function PostProblem() {
     const auth = useContext(AuthContext);
     const classes = useStyles();
     const history = useHistory();
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
         subject: '',
@@ -78,18 +80,24 @@ export default function PostProblem() {
         if (!validationData.errors.title && !validationData.errors.subject && !validationData.errors.grade
             && !validationData.errors.description && validationData.touched.title
             && validationData.touched.subject && validationData.touched.grade && validationData.touched.description) {
+            setLoading(true);
             postTopic({ ...formData, creator: { email: auth.email, id: auth.uid } })
                 .then((res) => {
+                    setLoading(false);
                     const id = res.data._id;
                     history.push(`/details/${id}`);
                 })
-                .catch(e => console.log(e));
+                .catch(e => {
+                    setLoading(false);
+                    console.log(e);
+                });
         }
 
     }
 
     return (
         <Container component="main" maxWidth="xs">
+            {loading && <Loading />}
             <CssBaseline />
             <div className={classes.paper}>
                 <SchoolIcon style={{ fontSize: 50 }}>
