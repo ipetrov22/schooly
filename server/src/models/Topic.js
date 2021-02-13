@@ -29,11 +29,11 @@ const topicSchema = new mongoose.Schema({
     },
     comments: [{
         ref: 'Comment',
-        type: mongoose.Types.ObjectId
+        type: 'ObjectId'
     }],
     date: {
         type: String,
-        default: new Date().toLocaleString('en-GB')
+        required: true
     }
 });
 
