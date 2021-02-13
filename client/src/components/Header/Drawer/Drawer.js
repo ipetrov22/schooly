@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -14,6 +14,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import { logout } from '../../../services/userService';
 import { useHistory } from 'react-router-dom';
+import { NotificationContext } from '../../../contexts/Notification';
 
 const useStyles = makeStyles({
     list: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles({
 });
 
 export default function MenuDrawer() {
+    const { setNotification } = useContext(NotificationContext);
     const history = useHistory();
     const classes = useStyles();
     const [open, setOpen] = useState(false);
@@ -40,10 +42,11 @@ export default function MenuDrawer() {
     const logoutHandler = () => {
         logout()
             .then((res) => {
+                setNotification({ message: 'Излязохте успешно.', type: 'success' });
                 history.push('/');
             })
             .catch(error => {
-                console.log(error);
+                setNotification({ message: error, type: 'error' });
             });
     }
 

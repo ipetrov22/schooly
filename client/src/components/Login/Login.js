@@ -62,7 +62,7 @@ export default function Login() {
         login(formData.email, formData.password)
             .then(user => {
                 setLoading(false);
-                setNotification({ message: 'Логнахте се успешно.', type: 'success' });
+                setNotification({ message: 'Влязохте успешно.', type: 'success' });
                 history.push('/');
             })
             .catch(error => {
