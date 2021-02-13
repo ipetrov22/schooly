@@ -14,7 +14,7 @@ export default function SimpleCard({ classes, topic }) {
             <Card className={classes.card}>
                 <CardContent>
                     <Typography color="textSecondary" gutterBottom>
-                        Jan 09 2021 (still hardcoded)
+                        {topic.date}
                     </Typography>
                     <Typography variant="h5" component="h2">
                         {subjectDictionary[topic.subject]}

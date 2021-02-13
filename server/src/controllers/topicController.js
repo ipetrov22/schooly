@@ -28,8 +28,7 @@ router.get('/getAll', async (req, res) => {
 router.get('/getOne', async (req, res) => {
     try {
         const topic = await topicService.getOne(req.query.id);
-
-        return res.json(topic[0]);
+        return res.json(topic);
     }
     catch(error) {
         console.log(error.message);

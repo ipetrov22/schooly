@@ -1,12 +1,12 @@
 const Topic = require('../models/Topic');
- 
+
 async function create(data) {
     try {
-        const topic = new Topic(data);
+        const topic = new Topic({ ...data, date: new Date().toLocaleString('en-GB') });
 
         return await topic.save();
     }
-    catch(error) {
+    catch (error) {
         console.log(error.message);
     }
 }
@@ -15,16 +15,28 @@ async function getAll() {
     try {
         return await Topic.find().lean();
     }
-    catch(error) {
+    catch (error) {
         console.log(error.message);
     }
 }
 
-async function getOne(_id) {
+async function getOne(id) {
     try {
-        return await Topic.find({_id}).lean();
+        return await Topic.findById(id).populate('comments').lean();
     }
-    catch(error) {
+    catch (error) {
+        console.log(error.message);
+    }
+}
+
+async function addComment(topicId, commentId) {
+    try {
+        await Topic.findByIdAndUpdate(topicId, {
+            $addToSet: {
+                comments: [commentId]
+            }
+        });
+    } catch (error) {
         console.log(error.message);
     }
 }
@@ -32,5 +44,6 @@ async function getOne(_id) {
 module.exports = {
     create,
     getAll,
-    getOne
+    getOne,
+    addComment
 }
