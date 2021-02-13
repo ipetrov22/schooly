@@ -12,6 +12,7 @@ import { useState } from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
 import { login } from '../../services/userService';
+import Loading from '../Loading';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -41,6 +42,7 @@ export default function Login() {
         password: '',
         repeatPassword: ''
     });
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const field = e.target.name;
@@ -54,17 +56,21 @@ export default function Login() {
     const submitForm = (e) => {
         e.preventDefault();
 
+        setLoading(true);
         login(formData.email, formData.password)
             .then(user => {
+                setLoading(false);
                 history.push('/');
             })
             .catch(error => {
+                setLoading(false);
                 console.log(error);
             });
     }
 
     return (
         <Container component="main" maxWidth="xs">
+            {loading && <Loading />}
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
