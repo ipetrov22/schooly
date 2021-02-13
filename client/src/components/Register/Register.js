@@ -9,10 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link, useHistory } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import validators from '../../utils/validators';
 import { register } from '../../services/userService';
 import Loading from '../Loading';
+import { NotificationContext } from '../../contexts/Notification';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Register() {
+    const { setNotification } = useContext(NotificationContext);
     const history = useHistory();
     const classes = useStyles();
     const [loading, setLoading] = useState(false);
@@ -81,11 +83,14 @@ export default function Register() {
             register(formData.email, formData.password)
                 .then(user => {
                     setLoading(false);
+                    setNotification({ message: 'Регистрирахте се успешно.', type: 'success' });
                     history.push('/');
                 })
                 .catch(error => {
                     setLoading(false);
-                    console.log(error);
+                    error.code === 'auth/email-already-in-use' ?
+                        setNotification({ message: 'Съществува акаунт с този имейл.', type: 'error' })
+                        : setNotification({ message: error.message, type: 'error' });
                 });
         }
     }
