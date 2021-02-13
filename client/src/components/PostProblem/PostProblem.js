@@ -12,10 +12,11 @@ import {
     FormControl,
     Select
 } from '@material-ui/core';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import validators from '../../utils/validators';
 import { postTopic } from '../../services/topicService';
+import { AuthContext } from '../../contexts/Auth';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PostProblem() {
+    const auth = useContext(AuthContext);
     const classes = useStyles();
     const history = useHistory();
     const [formData, setFormData] = useState({
@@ -73,16 +75,15 @@ export default function PostProblem() {
 
     const submitForm = (e) => {
         e.preventDefault();
-
         if (!validationData.errors.title && !validationData.errors.subject && !validationData.errors.grade
             && !validationData.errors.description && validationData.touched.title
             && validationData.touched.subject && validationData.touched.grade && validationData.touched.description) {
-                postTopic(formData)
-                    .then((data) => {
-                        // id = data._id
-                        history.push('/');
-                    })
-                    .catch(e => console.log(e));
+            postTopic({ ...formData, creator: { email: auth.email, id: auth.uid } })
+                .then((data) => {
+                    const id = data._id;
+                    history.push(`/details/${id}`);
+                })
+                .catch(e => console.log(e));
         }
 
     }

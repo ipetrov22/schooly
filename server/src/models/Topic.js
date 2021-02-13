@@ -17,13 +17,15 @@ const topicSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    creator: { 
+    creator: {
         email: {
-            type: String
+            type: String,
+            required: true
         },
         id: {
-            type: String
-        }
+            type: String,
+            required: true
+        },
     },
     comments: [{
         ref: 'Comment',
