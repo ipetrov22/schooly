@@ -50,7 +50,7 @@ export default function Details() {
                         </Grid>
                     </Grid>
 
-                    <Comments />
+                    <Comments comments={topic.comments} />
                 </React.Fragment>
                 :
                 ''
