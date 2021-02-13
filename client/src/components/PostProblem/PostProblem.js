@@ -79,8 +79,8 @@ export default function PostProblem() {
             && !validationData.errors.description && validationData.touched.title
             && validationData.touched.subject && validationData.touched.grade && validationData.touched.description) {
             postTopic({ ...formData, creator: { email: auth.email, id: auth.uid } })
-                .then((data) => {
-                    const id = data._id;
+                .then((res) => {
+                    const id = res.data._id;
                     history.push(`/details/${id}`);
                 })
                 .catch(e => console.log(e));
