@@ -12,6 +12,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import validators from '../../utils/validators';
 import { register } from '../../services/userService';
+import Loading from '../Loading';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
     const history = useHistory();
     const classes = useStyles();
+    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         email: '',
@@ -75,11 +77,14 @@ export default function Register() {
 
         if (!validationData.errors.email && !validationData.errors.password && !validationData.errors.repeatPassword
             && validationData.touched.email && validationData.touched.password && validationData.touched.repeatPassword) {
+            setLoading(true);
             register(formData.email, formData.password)
                 .then(user => {
+                    setLoading(false);
                     history.push('/');
                 })
                 .catch(error => {
+                    setLoading(false);
                     console.log(error);
                 });
         }
@@ -87,6 +92,7 @@ export default function Register() {
 
     return (
         <Container component="main" maxWidth="xs">
+            {loading && <Loading />}
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
