@@ -8,11 +8,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
 import { login } from '../../services/userService';
 import Loading from '../Loading';
+import { NotificationContext } from '../../contexts/Notification';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
+    const { setNotification } = useContext(NotificationContext);
     const history = useHistory();
     const classes = useStyles();
     const [formData, setFormData] = useState({
@@ -60,11 +62,12 @@ export default function Login() {
         login(formData.email, formData.password)
             .then(user => {
                 setLoading(false);
+                setNotification({ message: 'Логнахте се успешно.', type: 'success' });
                 history.push('/');
             })
             .catch(error => {
                 setLoading(false);
-                console.log(error);
+                setNotification({ message: 'Не съществува такъв потребител.', type: 'error' });
             });
     }
 

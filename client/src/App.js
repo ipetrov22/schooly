@@ -3,17 +3,21 @@ import Header from './components/Header';
 import AppRouter from './AppRouter';
 import Footer from './components/Footer';
 import { AuthProvider } from './contexts/Auth';
+import { NotificationProvider } from './contexts/Notification';
+import Notification from './components/Notification';
 
 function App() {
   return (
     <AuthProvider>
-      <div className="App">
-        <Header />
+      <NotificationProvider>
+        <div className="App">
+          <Header />
+          <Notification />
+          <AppRouter />
 
-        <AppRouter />
-
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </NotificationProvider>
     </AuthProvider>
   );
 }
