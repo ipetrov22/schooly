@@ -35,7 +35,7 @@ export default function Home() {
 
     useEffect(() => {
         getAllTopics()
-            .then((res) => setTopics(res.data))
+            .then((res) => setTopics(res.data.reverse()))
             .catch((err) => console.log(err));
     }, []);
 
