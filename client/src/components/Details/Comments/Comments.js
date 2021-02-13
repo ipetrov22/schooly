@@ -3,11 +3,13 @@ import { useState, useContext } from 'react';
 import { postComment } from '../../../services/commentService';
 import Comment from "./Comment";
 import { AuthContext } from '../../../contexts/Auth';
+import Loading from "../../Loading";
 
 export default function Comments({ initComments, topicId }) {
     const auth = useContext(AuthContext);
     const [comment, setComment] = useState('');
     const [comments, setComments] = useState(initComments);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setComment(e.target.value);
@@ -15,6 +17,7 @@ export default function Comments({ initComments, topicId }) {
 
     const submitComment = () => {
         if (comment.length > 0) {
+            setLoading(true);
             postComment({
                 topicId,
                 comment: {
@@ -26,10 +29,14 @@ export default function Comments({ initComments, topicId }) {
                 }
             })
                 .then(res => {
+                    setLoading(false);
                     setComment('');
                     setComments([res.data].concat(comments));
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    setLoading(false);
+                    console.log(err);
+                });
         }
     }
 
@@ -38,7 +45,6 @@ export default function Comments({ initComments, topicId }) {
             <Typography variant="h4" component="h4" style={{ marginTop: 80, marginBottom: 40 }}>
                 Коментари
             </Typography>
-
             <TextField
                 id="outlined-multiline-static"
                 label="Коментирай"
@@ -51,6 +57,8 @@ export default function Comments({ initComments, topicId }) {
             <Button onClick={submitComment} variant="contained" color="primary" style={{ marginTop: 10, marginBottom: 20, float: "right" }}>
                 Коментирай
             </Button>
+
+            {loading && <Loading />}
 
             {comments ? comments.map(comment => <Comment key={comment._id} comment={comment} />) : null}
 
