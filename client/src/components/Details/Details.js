@@ -22,7 +22,7 @@ export default function Details() {
 
     useEffect(() => {
         getOneTopic(id)
-            .then(res => setTopic(res.data))
+            .then(res => setTopic({...res.data, comments: res.data.comments.reverse()}))
             .catch(err => console.log(err));
     }, [id]);
 
@@ -41,7 +41,7 @@ export default function Details() {
                             </Typography>
 
                             <Typography variant="caption" display="block" gutterBottom>
-                                {topic.date} by {topic.creator && topic.creator.email}
+                                {topic.date} от {topic.creator && topic.creator.email}
                             </Typography>
 
                             <Typography variant="body1" gutterBottom>
@@ -50,7 +50,7 @@ export default function Details() {
                         </Grid>
                     </Grid>
 
-                    <Comments comments={topic.comments} />
+                    <Comments initComments={topic.comments} topicId={topic._id} />
                 </React.Fragment>
                 :
                 ''

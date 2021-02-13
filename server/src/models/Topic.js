@@ -28,8 +28,8 @@ const topicSchema = new mongoose.Schema({
         },
     },
     comments: [{
-        ref: 'Comment',
-        type: 'ObjectId'
+        type: 'ObjectId',
+        ref: 'Comment'
     }],
     date: {
         type: String,
