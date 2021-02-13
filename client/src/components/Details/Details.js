@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { getOneTopic } from './../../services/topicService';
 import { subjectDictionary } from '../../utils/dictionaries';
 import React from 'react';
+import Loading from '../Loading';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -22,7 +23,7 @@ export default function Details() {
 
     useEffect(() => {
         getOneTopic(id)
-            .then(res => setTopic({...res.data, comments: res.data.comments.reverse()}))
+            .then(res => setTopic({ ...res.data, comments: res.data.comments.reverse() }))
             .catch(err => console.log(err));
     }, [id]);
 
@@ -53,7 +54,7 @@ export default function Details() {
                     <Comments initComments={topic.comments} topicId={topic._id} />
                 </React.Fragment>
                 :
-                ''
+                <Loading />
             }
         </Container>
 
