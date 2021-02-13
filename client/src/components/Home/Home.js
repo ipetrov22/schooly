@@ -5,6 +5,7 @@ import ProblemCard from './ProblemCard';
 import Intro from './Intro';
 import { getAllTopics } from '../../services/topicService';
 import { useState, useEffect } from 'react';
+import Loading from '../Loading';
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -43,11 +44,14 @@ export default function Home() {
         <main>
             <Intro classes={classes} />
 
-            <Container className={classes.cardGrid} maxWidth="md">
-                <Grid container spacing={4}>
-                    {topics && topics.map(topic => <ProblemCard key={topic._id} classes={classes} topic={topic} />)}
-                </Grid>
-            </Container>
+            {topics ?
+                <Container className={classes.cardGrid} maxWidth="md">
+                    <Grid container spacing={4}>
+                        {topics.map(topic => <ProblemCard key={topic._id} classes={classes} topic={topic} />)}
+                    </Grid>
+                </Container>
+                : <Loading />
+            }
         </main>
     );
 }
