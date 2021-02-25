@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3333';
+const url = 'https://schooly-noit.herokuapp.com';
 
 export const postTopic = (data) => {
     try {
