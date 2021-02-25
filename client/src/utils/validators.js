@@ -32,7 +32,7 @@ const password = (password) => {
         return '';
     }
 
-    return 'Паролата трябва да е поне 8 знака и да съдържа малка буква, главна буква и цифра.';
+    return 'Паролата трябва да е поне 8 знака и да съдържа малка буква, главна буква (латински) и цифра.';
 }
 
 const repeatPassword = (repeatPassword, password) => {
