@@ -57,13 +57,13 @@ export default function MenuDrawer() {
             onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
         >
-            <List>
+            {/* <List>
                 <ListItem button key={'profile'}>
                     <ListItemIcon><AccountCircleIcon /></ListItemIcon>
                     <ListItemText primary={'Профил'} />
                 </ListItem>
             </List>
-            <Divider />
+            <Divider /> */}
             <List>
                 <ListItem button onClick={logoutHandler} key={'logout'}>
                     <ListItemIcon><ExitToAppIcon /></ListItemIcon>
